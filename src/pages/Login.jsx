@@ -17,14 +17,13 @@ export default function Login() {
     setCargando(true); setError('');
     try {
       await login(form.username, form.password);
-      navigate('/dashboard');
+      window.location.href = '/vacaciones-frontend/#/dashboard';
     } catch (err) {
       setError(err.response?.data?.error || 'Error al iniciar sesión');
     } finally {
       setCargando(false);
     }
   };
-
   return (
     <div className="login-page">
       <div className="escudo-bg" />
