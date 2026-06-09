@@ -11,11 +11,12 @@ api.interceptors.request.use((config) => {
   return config;
 });
 
-// Redirigir al login si el token expiró
+// Solo redirigir al login si el token expiró (no en login)
 api.interceptors.response.use(
   (res) => res,
   (err) => {
-    if (err.response?.status === 401) {
+    const isLoginEndpoint = err.config?.url?.includes('/api/auth/login');
+    if (err.response?.status === 401 && !isLoginEndpoint) {
       localStorage.removeItem('token');
       localStorage.removeItem('usuario');
       window.location.href = '/vacaciones-frontend/';
