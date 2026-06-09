@@ -32,6 +32,7 @@ export function AuthProvider({ children }) {
   const logout = () => {
     localStorage.clear();
     setUsuario(null);
+    window.location.href = '/vacaciones-frontend/';
   };
 
   return (
