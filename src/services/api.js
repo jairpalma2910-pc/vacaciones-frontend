@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:4000';
+const API_URL = 'https://vacaciones-backend-7ota.onrender.com';
 
 const api = axios.create({ baseURL: API_URL });
 
@@ -18,7 +18,7 @@ api.interceptors.response.use(
     if (err.response?.status === 401) {
       localStorage.removeItem('token');
       localStorage.removeItem('usuario');
-      window.location.href = '/';
+      window.location.href = '/vacaciones-frontend/';
     }
     return Promise.reject(err);
   }
