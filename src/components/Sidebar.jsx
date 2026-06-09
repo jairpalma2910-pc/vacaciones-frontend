@@ -1,5 +1,6 @@
 import { useAuth } from '../context/AuthContext';
 import { useTheme } from '../context/ThemeContext';
+import escudoSitt from '../assets/escudo-sitt.png';
 
 const NAV_ITEMS = [
   { id: 'inicio',       icon: '🏠', label: 'Inicio',          roles: ['admin','rrhh','empleado'] },
@@ -17,35 +18,18 @@ export default function Sidebar({ seccion, setSeccion, collapsed, setCollapsed, 
 
   return (
     <>
-      {/* Overlay móvil */}
-      {!collapsed && (
-        <div
-          className="sidebar-overlay"
-          onClick={() => setCollapsed(true)}
-          style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.5)', zIndex: 99, display: 'none' }}
-        />
-      )}
-
       <aside className={`sidebar${collapsed ? ' collapsed' : ''}`}>
-        {/* Header */}
         <div className="sidebar-header">
-          <img
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Escudo_Tijuana.svg/200px-Escudo_Tijuana.svg.png"
-            alt="Escudo"
-            className="sidebar-logo"
-          />
+          <img src={escudoSitt} alt="Escudo SITT" className="sidebar-logo" />
           <div className="sidebar-title">Control de Vacaciones</div>
           <div className="sidebar-subtitle">SITT • Ayto. Tijuana</div>
         </div>
 
-        {/* Nav */}
         <nav className="sidebar-nav">
           {itemsFiltrados.map(item => (
-            <div
-              key={item.id}
+            <div key={item.id}
               className={`nav-item${seccion === item.id ? ' active' : ''}`}
-              onClick={() => { setSeccion(item.id); }}
-            >
+              onClick={() => { setSeccion(item.id); }}>
               <span className="nav-icon">{item.icon}</span>
               <span>{item.label}</span>
               {item.id === 'solicitudes' && notifCount > 0 && (
@@ -55,9 +39,7 @@ export default function Sidebar({ seccion, setSeccion, collapsed, setCollapsed, 
           ))}
         </nav>
 
-        {/* Footer */}
         <div className="sidebar-footer">
-          {/* Toggle tema */}
           <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 14 }}>
             <label className="switch" title="Cambiar tema">
               <input type="checkbox" checked={dark} onChange={toggleTheme} />
@@ -68,7 +50,6 @@ export default function Sidebar({ seccion, setSeccion, collapsed, setCollapsed, 
             </span>
           </div>
 
-          {/* Usuario */}
           <div className="sidebar-user">
             {usuario?.foto_url
               ? <img src={usuario.foto_url} alt="avatar" />
@@ -80,11 +61,9 @@ export default function Sidebar({ seccion, setSeccion, collapsed, setCollapsed, 
             </div>
           </div>
 
-          <button
-            className="btn-institucional"
+          <button className="btn-institucional"
             style={{ width: '100%', borderColor: 'rgba(255,255,255,0.4)', color: 'rgba(255,255,255,0.8)', fontSize: 13 }}
-            onClick={logout}
-          >
+            onClick={logout}>
             🚪 Cerrar Sesión
           </button>
         </div>
