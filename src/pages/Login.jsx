@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import escudoSitt from '../assets/escudo-sitt.png';
 
 export default function Login() {
   const { login } = useAuth();
@@ -26,24 +27,16 @@ export default function Login() {
 
   return (
     <div className="login-page">
-      {/* Fondo con escudo */}
       <div className="escudo-bg" />
-
       <div className="login-container">
-        {/* Header institucional */}
         <div className="login-header">
-          <img
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Escudo_Tijuana.svg/200px-Escudo_Tijuana.svg.png"
-            alt="Escudo Tijuana"
-            className="login-escudo"
-          />
+          <img src={escudoSitt} alt="Escudo SITT" className="login-escudo" />
           <div>
             <h1 className="login-title">H. XXV Ayuntamiento de Tijuana</h1>
             <p className="login-subtitle">SITT — Control de Vacaciones</p>
           </div>
         </div>
 
-        {/* Formulario */}
         <form className="login-form" onSubmit={handleSubmit}>
           <h2 className="login-form-title">Iniciar Sesión</h2>
           <p className="login-form-sub">Ingresa tus credenciales institucionales</p>
@@ -60,14 +53,9 @@ export default function Login() {
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
               </svg>
-              <input
-                className="input"
-                type="text"
-                placeholder="Usuario institucional"
-                value={form.username}
-                onChange={e => setForm({ ...form, username: e.target.value })}
-                autoComplete="username"
-              />
+              <input className="input" type="text" placeholder="Usuario institucional"
+                value={form.username} onChange={e => setForm({ ...form, username: e.target.value })}
+                autoComplete="username" />
             </div>
           </div>
 
@@ -77,33 +65,23 @@ export default function Login() {
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
               </svg>
-              <input
-                className="input"
-                type={showPass ? 'text' : 'password'}
-                placeholder="••••••••"
-                value={form.password}
-                onChange={e => setForm({ ...form, password: e.target.value })}
-                autoComplete="current-password"
-              />
-              <button type="button" onClick={() => setShowPass(s => !s)} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '0 8px', color: 'var(--gris-texto)' }}>
+              <input className="input" type={showPass ? 'text' : 'password'} placeholder="••••••••"
+                value={form.password} onChange={e => setForm({ ...form, password: e.target.value })}
+                autoComplete="current-password" />
+              <button type="button" onClick={() => setShowPass(s => !s)}
+                style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '0 8px', color: 'var(--gris-texto)' }}>
                 {showPass ? '🙈' : '👁️'}
               </button>
             </div>
           </div>
 
-          <button
-            type="submit"
-            className="btn-institucional filled btn-lg"
-            style={{ width: '100%', marginTop: '8px' }}
-            disabled={cargando}
-          >
+          <button type="submit" className="btn-institucional filled btn-lg"
+            style={{ width: '100%', marginTop: '8px' }} disabled={cargando}>
             {cargando ? (
               <span style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                 <span className="spin">⏳</span> Verificando...
               </span>
-            ) : (
-              <>🔐 Entrar al Sistema</>
-            )}
+            ) : <>🔐 Entrar al Sistema</>}
           </button>
         </form>
 
@@ -146,6 +124,7 @@ export default function Login() {
           height: 70px;
           object-fit: contain;
           filter: drop-shadow(0 2px 8px rgba(0,0,0,0.3));
+          border-radius: 50%;
         }
         .login-title {
           font-family: 'Montserrat', sans-serif;
